@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_list/utilities/constants.dart';
 
 class AddTaskScreen extends StatelessWidget {
-
+  final onPressed;
+  final onChanged;
+  AddTaskScreen({this.onPressed, this.onChanged});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,18 +30,12 @@ class AddTaskScreen extends StatelessWidget {
             ),
             TextField(
               autofocus: true,
-              decoration: kNewTaskInput,
               textAlign: TextAlign.center,
-
-              onChanged: (value){
-
-              },
+              onChanged: onChanged,
             ),
             FlatButton(
               color: Colors.lightBlueAccent,
-              onPressed: (){
-
-              },
+              onPressed: onPressed,
               child: Text(
                 'Add',
                 style: TextStyle(

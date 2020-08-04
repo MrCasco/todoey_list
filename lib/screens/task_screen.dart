@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_list/components/tasks_list.dart';
 import 'add_task_screen.dart';
+import 'package:todoey_list/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+
+  List<Task> tasks = [
+    Task(name: 'Buy milk'),
+    Task(name: 'Buy bread'),
+    Task(name: 'Buy water'),
+  ];
+
+  String newTask;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +28,19 @@ class TasksScreen extends StatelessWidget {
             context: context,
             builder: (context) => SingleChildScrollView(
               child: Container(
-                child: AddTaskScreen(),
+                child: AddTaskScreen(
+                  onChanged: (value){
+                    setState(() {
+                      newTask = value;
+                    });
+                  },
+                  onPressed: (){
+                    setState(() {
+                      tasks.add(Task(name: newTask));
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               )
             ),
@@ -59,7 +86,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 tasks',
+                  '${tasks.length.toString()} remaining tasks',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
@@ -78,7 +105,9 @@ class TasksScreen extends StatelessWidget {
                 ),
               ),
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TasksList(),
+              child: TasksList(
+                tasks
+              ),
             ),
           ),
         ],
