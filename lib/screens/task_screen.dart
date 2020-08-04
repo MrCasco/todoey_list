@@ -5,9 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:todoey_list/models/task_data.dart';
 
 class TasksScreen extends StatelessWidget {
-
-  String newTask;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,19 +15,7 @@ class TasksScreen extends StatelessWidget {
             context: context,
             builder: (context) => SingleChildScrollView(
               child: Container(
-                child: AddTaskScreen(
-                  onChanged: (value){
-                    /*setState(() {
-                      newTask = value;
-                    });*/
-                  },
-                  onPressed: (){
-                    /*setState(() {
-                      Provider.of<TaskData>(context).tasks.add(Task(name: newTask));
-                    });*/
-                    Navigator.pop(context);
-                  },
-                ),
+                child: AddTaskScreen(),
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
               )
             ),
@@ -76,7 +61,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${Provider.of<TaskData>(context).tasks.length} remaining tasks',
+                  '${Provider.of<TaskData>(context).taskCount} remaining tasks',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,

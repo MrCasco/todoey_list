@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class TaskTile extends StatelessWidget {
   final bool isChecked;
   final String title;
-  final checkBoxCallBack;
+  final Function checkBoxCallBack;
+  final onLongPress;
 
-  TaskTile({this.isChecked = false, this.title, this.checkBoxCallBack});
+  TaskTile({this.onLongPress, this.isChecked = false, this.title, this.checkBoxCallBack});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: onLongPress,
       title: Text(
         title,
         style: TextStyle(
